@@ -35,6 +35,77 @@ class Evento{
         return $this->fechaevento === $fechaevento;
     }
 }
+
+class ListaEventos {
+    private $eventos = [];
+
+    // Método para agregar un evento
+    public function agregarEvento($nombre,$tituloevento, $fechaevento) {
+        // Generar un ID único para el evento
+        $id = uniqid();
+
+        // Crear un nuevo objeto Evento con los valores proporcionados
+        $evento = new Evento($id, $nombre,$tituloevento, $fechaevento);
+
+        // Agregar el evento a la lista de eventos
+        array_push($this->eventos, $evento);
+
+        // Devolver el objeto Evento recién creado
+        return $evento;
+    }
+
+    // Método para modificar un evento existente
+    public function modificarEvento($id, $nombre, $fecha, $lugar) {
+        // Buscar el evento por su ID
+        $evento = $this->buscarEventoPorId($id);
+
+        // Actualizar el evento con los valores proporcionados
+        $evento->setNombre($nombre);
+        $evento->setFecha($fecha);
+        $evento->setLugar($lugar);
+
+        // Devolver el objeto Evento actualizado
+        return $evento;
+    }
+
+    // Método para eliminar un evento existente
+    public function eliminarEvento($id) {
+        // Buscar el evento por su ID
+        $index = $this->buscarEventoIndexPorId($id);
+
+        // Eliminar el evento de la lista de eventos
+        array_splice($this->eventos, $index, 1);
+
+        // Devolver verdadero
+        return true;
+    }
+
+    // Método para buscar un evento por su ID
+    public function buscarEventoPorId($id) {
+        foreach ($this->eventos as $evento) {
+            if ($evento->getId() == $id) {
+                return $evento;
+            }
+        }
+
+        return null;
+    }
+
+    // Método para buscar el índice de un evento por su ID
+    public function buscarEventoIndexPorId($id) {
+        foreach ($this->eventos as $index => $evento) {
+            if ($evento->getId() == $id) {
+                return $index;
+            }
+        }
+
+        return null;
+    }
+}
+
+  
+
+
 //Creacion de instancias de los objetos evento
 $evento1 = new Evento("1","Fernando","Cumpleaños de mama","22-10-2023","Dia de cumpleaños de mama Importante");
 $evento2 = new Evento("1","Fernando","Ir al super","02-03-2023","Comprar los alimentos para el mes");
