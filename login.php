@@ -10,8 +10,12 @@
 <body>
 <form method="POST">
 <div class="card">
+  <center><h1>Bienvenido</h1></center>
+  <center><h6>Ingresa tus credenciales</h6></center>
+
   <div class="card-body">
 <div class="form-group">
+
         <label for="usuario">Usuario:</label>
         <input class="form-control" type="text" name="usuario" required>
         <br>
